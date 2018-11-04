@@ -96,3 +96,29 @@ def all_notifications(request):
     notifications = Notification.objects.all().order_by('-pub_date', 'level')
     args = {'notifications': notifications}
     return render(request, 'adminapp/all_notifications.html', args)
+# class NotificationDetails(TemplateView):
+#         template_name = 'adminapp/notification_details.html'
+#     def get(self, request, pk=None):
+#             form = HomeForm()
+#             notification = Notification.objects.get(id=pk)
+#             posts = Post.objects.filter(notification=notification).all().order_by('-created')
+#             # users = User.objects.exclude(id=request.user.id)
+#             # friend = Friend.objects.get(current_user=request.user)
+#             # friends = friend.users.all()
+#
+#             args = {'form': form, 'posts': posts, 'notification': notification}
+#             return render(request, self.template_name, args)
+#
+#         def post(self, request):
+#             form = HomeForm(request.POST)
+#             if form.is_valid():
+#                 post = form.save(commit=False)
+#                 post.user = request.user
+#                 post.save()
+# 
+#                 text = form.cleaned_data['post']
+#                 form = HomeForm()
+#                 return redirect('home:home')
+#
+#             args = {'form': form, 'text': text}
+#             return render(request, self.template_name, args)

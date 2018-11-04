@@ -20,7 +20,7 @@
     <tbody>
       {% for relationship in relationships %}
         <tr>
-          <td><a href="/subject-details/{{relationship.subject.subjectid}}/">{{relationship.subject}}</a></td>
+          <td><a href="{% url 'subject-details' relationship.subject.subjectid %}">{{relationship.subject}}</a></td>
           <td>{{relationship.grade}}</td>
           <td>{{relationship.posted}}</td>
           <td>{{relationship.updated}}</td>

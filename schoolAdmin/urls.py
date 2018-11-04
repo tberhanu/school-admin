@@ -18,10 +18,13 @@ from django.urls import path, include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-
+# app_name = 'schoolAdmin'
 urlpatterns = [
+
     path('all-notifications/', views.all_notifications, name="all_notifications"),
     path('notification-details/<int:pk>/', views.notification_details, name="notification_details"),
+    # path('notification-details/<int:pk>/', views.NotificationDetails.as_view(), name="notification_details"),
+
     path('notifications/<int:level>/', views.notifications, name='notifications'),
     path('staffs/', views.staffs, name='staffs'),
     path('', views.home, name='home'),

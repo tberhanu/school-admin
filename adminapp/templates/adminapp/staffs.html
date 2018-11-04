@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="/notifications/">Notifications</a>
+              <a class="nav-link" href="{% url 'notifications' level=user.student.level %}">Notifications</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Events</a>

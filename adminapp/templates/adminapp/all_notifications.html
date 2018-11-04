@@ -10,7 +10,7 @@
   <p>Students are expected to visit this page frequently.</p>
   <p>These notifications are for all class levels.</p>
   <p>If you want to see only your class level notifications,
-     click <a href="/notifications/{{user.student.level}}/">Level {{user.student.level}} Notifications.</a></p>
+     click <a href="{% url 'notifications' user.student.level %}">Level {{user.student.level}} Notifications.</a></p>
   <table class="table">
     <thead>
       <tr>

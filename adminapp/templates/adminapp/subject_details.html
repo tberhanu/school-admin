@@ -21,7 +21,7 @@
     <tbody>
       {% for relationship in relationships %}
         <tr>
-          <td><a href="/teacher-profile/{{relationship.teacher.teacherid}}/">{{relationship.teacher.first_name}}</a></td>
+          <td><a href="{% url 'teacher_profile' relationship.teacher.teacherid %}">{{relationship.teacher.first_name}}</a></td>
           <td>{{relationship.year}} </td>
           <td>{{relationship.semester}} </td>
         <tr>

@@ -129,3 +129,10 @@ class Notification(models.Model):
         return self.title
     def __str__(self):
         return self.title
+
+# class Chat(models.Model):
+#     post = models.CharField(max_length=500)
+#     student = models.ForeignKey(Student, on_delete=models.CASCADE)
+#     notification = models.ForeignKey(Notification, on_delete=models.CASCADE)
+#     created = models.DateTimeField(auto_now_add=True)
+#     updated = models.DateTimeField(auto_now=True)
