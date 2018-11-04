@@ -1,0 +1,36 @@
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}
+<title>subject Details</title>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  <h2>Details about {{subject.title}}</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Teacher Name</th>
+        <th>Year</th>
+        <th>Semester</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for relationship in relationships %}
+        <tr>
+          <td><a href="/teacher-profile/{{relationship.teacher.teacherid}}/">{{relationship.teacher.first_name}}</a></td>
+          <td>{{relationship.year}} </td>
+          <td>{{relationship.semester}} </td>
+        <tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% for a in "abcdefgh" %}
+    <br><br>
+  {% endfor %}
+</div>
+
+{% endblock %}

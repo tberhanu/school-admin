@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Grades</title>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  <h2>Currently Posted Grades</h2>
+  <p>If you have any concerns about these grades, please contact your professor.</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Grade</th>
+        <th>Posted Date</th>
+        <th>Updated Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for relationship in relationships %}
+        <tr>
+          <td><a href="/subject-details/{{relationship.subject.subjectid}}/">{{relationship.subject}}</a></td>
+          <td>{{relationship.grade}}</td>
+          <td>{{relationship.posted}}</td>
+          <td>{{relationship.updated}}</td>
+        <tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% for a in "abcdefgh" %}
+    <br><br>
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Notifications</title>
+{% endblock %}
+{% block content %}
+
+<div class="container bbn">
+  <h2>Currently Posted Notifications</h2>
+  <p>Students are expected to visit this page frequently.</p>
+  <p>These notifications are only for your class level which is level {{user.student.level}}.</p>
+  <p>If you want to see other class level notifications,
+     click <a href="/all-notifications/">All Notifications.</a></p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Posted by</th>
+        <th>Course</th>
+        <th>Level</th>
+        <th>Posted at</th>
+        <th>Updated at</th>
+        <th>Notification Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for notification in notifications %}
+        <tr>
+          <td>{{notification.title}}</td>
+          <td>{{notification.poster}}</td>
+          <td>{{notification.course}}</td>
+          <td>{{notification.level}}</td>
+          <td>{{notification.pub_date}}</td>
+          <td>{{notification.updated_date}}</td>
+          <td><a href="/notification-details/{{notification.pk}}/">Details</a></td>
+        <tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% for a in "abcdefgh" %}
+    <br><br>
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+<title>Details</title>
+<div class="container">
+    {% if notification.image %}
+      <p>Uploaded Notification Images</p>
+      <a href="#"><img class="card-img-top" src="{{ notification.image.url }}" alt="pic" width=240></a>
+    {% endif %}
+    <p>Uploaded Text Notification</p>
+      <p>{{notification.content}}</p>
+      <p>Posted by: {{notification.poster}}</p>
+      <p>Postd at: {{notification.pub_date}}</p>
+      <p>Last updated at: {{notification.updated_date}}</p>
+</div>
