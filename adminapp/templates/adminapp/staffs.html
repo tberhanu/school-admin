@@ -64,7 +64,7 @@
         {% for teacher in teachers %}
           <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="{{ teacher.image.url }}" alt="pic" width=240></a>
+              <a href="{% url 'teacher_profile' teacher.teacherid %}"><img class="card-img-top" src="{{ teacher.image.url }}" alt="pic" width=240></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <i>{{teacher.first_name}} {{teacher.last_name}}</i>
