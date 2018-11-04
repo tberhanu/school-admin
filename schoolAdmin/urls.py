@@ -22,8 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
 
     path('all-notifications/', views.all_notifications, name="all_notifications"),
-    path('notification-details/<int:pk>/', views.notification_details, name="notification_details"),
-    # path('notification-details/<int:pk>/', views.NotificationDetails.as_view(), name="notification_details"),
+    # path('notification-details/<int:pk>/', views.notification_details, name="notification_details"),
+    path('notification-details/<int:pk>/', views.NotificationDetails.as_view(), name="notification_details"),
 
     path('notifications/<int:level>/', views.notifications, name='notifications'),
     path('staffs/', views.staffs, name='staffs'),

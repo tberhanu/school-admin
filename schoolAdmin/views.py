@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from adminapp.models import (Student, Student_Subject_Relation, Subject,
- Subject_Teacher_Relation, Teacher, Notification)
+ Subject_Teacher_Relation, Teacher, Notification, Post)
 from django.shortcuts import get_object_or_404
 # myproject/views.py
 from django.views.generic import TemplateView
@@ -8,7 +8,7 @@ from django.conf import settings
 
 # from django.core.mail import EmailMessage
 from django.core.mail import send_mail
-
+from adminapp.forms import HomeForm
 def sending(request):
     # email = EmailMessage('title', 'body', to=['tberhanu@berkeley.edu'])
     # email.send()
@@ -96,29 +96,33 @@ def all_notifications(request):
     notifications = Notification.objects.all().order_by('-pub_date', 'level')
     args = {'notifications': notifications}
     return render(request, 'adminapp/all_notifications.html', args)
-# class NotificationDetails(TemplateView):
-#         template_name = 'adminapp/notification_details.html'
-#     def get(self, request, pk=None):
-#             form = HomeForm()
-#             notification = Notification.objects.get(id=pk)
-#             posts = Post.objects.filter(notification=notification).all().order_by('-created')
-#             # users = User.objects.exclude(id=request.user.id)
-#             # friend = Friend.objects.get(current_user=request.user)
-#             # friends = friend.users.all()
-#
-#             args = {'form': form, 'posts': posts, 'notification': notification}
-#             return render(request, self.template_name, args)
-#
-#         def post(self, request):
-#             form = HomeForm(request.POST)
-#             if form.is_valid():
-#                 post = form.save(commit=False)
-#                 post.user = request.user
-#                 post.save()
-# 
-#                 text = form.cleaned_data['post']
-#                 form = HomeForm()
-#                 return redirect('home:home')
-#
-#             args = {'form': form, 'text': text}
-#             return render(request, self.template_name, args)
+
+class NotificationDetails(TemplateView):
+    template_name = 'adminapp/notification_details.html'
+    def get(self, request, pk):
+            form = HomeForm()
+            notification = Notification.objects.get(id=pk)
+            posts = Post.objects.filter(notification=notification).all().order_by('-created')
+            # users = User.objects.exclude(id=request.user.id)
+            # friend = Friend.objects.get(current_user=request.user)
+            # friends = friend.users.all()
+
+            args = {'form': form, 'posts': posts, 'notification': notification}
+            return render(request, self.template_name, args)
+
+    def post(self, request, pk):
+        form = HomeForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            notification = Notification.objects.get(id=pk)
+
+            post.student = request.user.student
+            post.notification = notification
+            post.save()
+
+            text = form.cleaned_data['post']
+            form = HomeForm()
+            return redirect('/notification-details/%d/' % pk)
+
+        args = {'form': form, 'text': text, 'notification': notification}
+        return render(request, self.template_name, args)

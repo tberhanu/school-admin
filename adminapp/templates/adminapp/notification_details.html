@@ -9,4 +9,20 @@
       <p>Posted by: {{notification.poster}}</p>
       <p>Postd at: {{notification.pub_date}}</p>
       <p>Last updated at: {{notification.updated_date}}</p>
+
+
+    <div class="col-md-8">
+      <h3>Chatting Area for any concerns about this notification.</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.post }}
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        <h2>{{ text }}</h2>
+        {% for post in posts %}
+            <p><b>{{ post.student.first_name }}</b> {{ post.post}} </p>
+        {% endfor %}
+    </div>
+
 </div>
