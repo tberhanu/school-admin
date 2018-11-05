@@ -9,6 +9,9 @@ from django.conf import settings
 # from django.core.mail import EmailMessage
 from django.core.mail import send_mail
 from adminapp.forms import HomeForm
+
+from django.views.generic.detail import DetailView
+
 def sending(request):
     # email = EmailMessage('title', 'body', to=['tberhanu@berkeley.edu'])
     # email.send()
@@ -49,14 +52,14 @@ class Grade(TemplateView):
                 args = {'relationships': relationships}
                 return render(request, self.template_name, args)
 
-class SubjectDetail(TemplateView):
+class SubjectDetails(TemplateView):
     template_name = 'adminapp/subject_details.html'
     def get(self, request, subjectid):
         login_url = settings.LOGIN_URL.lstrip('/')
         if not request.user.is_authenticated:
             return redirect(login_url)
         else:
-            subject = Subject.objects.get(subjectid=subjectid)
+            subject = get_object_or_404(Subject, subjectid=subjectid)
             relationships = Subject_Teacher_Relation.objects.filter(subject=subject)
             args = {'subject': subject, 'relationships': relationships}
             return render(request, self.template_name, args)
@@ -68,7 +71,7 @@ class TeacherProfile(TemplateView):
         if not request.user.is_authenticated:
             return redirect(login_url)
         else:
-            teacher = Teacher.objects.get(teacherid=teacherid)
+            teacher = get_object_or_404(Teacher, teacherid=teacherid)
             args = {'teacher': teacher}
             return render(request, self.template_name, args)
 
@@ -88,7 +91,7 @@ class Notice(TemplateView):
         notifications = Notification.objects.all().filter(level=level).order_by('-pub_date')
         args = {'notifications': notifications}
         return render(request, self.template_name, args)
-        
+
 class AllNotifications(TemplateView):
     template_name = 'adminapp/all_notifications.html'
     def get(self, request):
@@ -103,7 +106,7 @@ class NotificationDetails(TemplateView):
     template_name = 'adminapp/notification_details.html'
     def get(self, request, pk):
             form = HomeForm()
-            notification = Notification.objects.get(id=pk)
+            notification = get_object_or_404(Notification, id=pk)
             posts = Post.objects.filter(notification=notification).all().order_by('-created')
             args = {'form': form, 'posts': posts, 'notification': notification}
             return render(request, self.template_name, args)

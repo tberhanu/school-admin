@@ -18,6 +18,8 @@ from django.urls import path, include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+# from .views import ArticleDetailView
+
 urlpatterns = [
 
     path('all-notifications/', views.AllNotifications.as_view(), name="all_notifications"),
@@ -35,7 +37,7 @@ urlpatterns = [
     path('grades/<int:studentid>/', views.Grade.as_view(), name="grades"),
     path('accounts/', include('allauth.urls')),
     # path('gitlog/', views.Homes.as_view(), name='homes'), # this couldn't work
-    path('subject-details/<int:subjectid>/', views.SubjectDetail.as_view(), name="subject-details"),
+    path('subject-details/<int:subjectid>/', views.SubjectDetails.as_view(), name="subject-details"),
     path('teacher-profile/<int:teacherid>/', views.TeacherProfile.as_view(), name="teacher_profile"),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

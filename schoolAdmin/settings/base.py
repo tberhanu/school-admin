@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from .secured_info import * # new
-from schoolAdmin.settings import secured_info
+# from .secured_info import * # new
+# from schoolAdmin.settings import secured_info
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,9 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ['SECRET_KEY'] # new
-
-PASSWORD = secured_info.PASSWORD
+SECRET_KEY = os.environ['SECRET_KEY'] # new
+# SECRET_KEY = secured_info.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -100,6 +99,7 @@ DATABASES = {
         'NAME': 'schoolAdmin',
         'USER': 'postgres',
         'PASSWORD': os.environ['PASSWORD'],
+        # 'PASSWORD': secured_info.PASSWORD,
         'HOST': '127.0.0.1',
         'PORT': '5433',
     }
@@ -172,8 +172,8 @@ LOGIN_EXEMPT_URLS = (
 )
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = secured_info.EMAIL_HOST_USER
-EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = secured_info.EMAIL_HOST_PASSWORD
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = secured_info.EMAIL_HOST_USER
+# EMAIL_PORT = 587
+# EMAIL_HOST_PASSWORD = secured_info.EMAIL_HOST_PASSWORD
