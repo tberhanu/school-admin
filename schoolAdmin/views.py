@@ -22,80 +22,82 @@ def sending(request):
     return render(request, 'adminapp/send.html')
 
 
-class Homes(TemplateView):
-    template_name = 'homes.html'
+class Home(TemplateView):
+    template_name = 'adminapp/home.html'
 
-
-def home(request):
-    return render(request, 'adminapp/home.html')
 def logout(request):
     return render(request, 'registration/logout.html')
 
-def grades(request, studentid=None):
-    login_url = settings.LOGIN_URL.lstrip('/')
-    """ Omitting the following 'IfCase', still protected but not returning 404,
-    rather error message telling Anonymous User don't have such Attribute"""
-    if not request.user.is_authenticated:
-        return redirect(login_url)
-    else:
-        if request.user.student.studentid != studentid:
+class Grade(TemplateView):
+    template_name = 'adminapp/grades.html'
+    def get(self, request, studentid=None):
+        login_url = settings.LOGIN_URL.lstrip('/')
+        """ Omitting the following 'IfCase', still protected but not returning 404,
+        rather error message telling Anonymous User don't have such Attribute"""
+        if not request.user.is_authenticated:
             return redirect(login_url)
         else:
-            student = Student.objects.get(studentid=studentid)
-            subjects = student.subjects.all()
-            relationships = []
-            for subject in subjects:
-                relationships = relationships + [get_object_or_404(Student_Subject_Relation, student=student, subject=subject)]
+            if request.user.student.studentid != studentid:
+                return redirect(login_url)
+            else:
+                student = Student.objects.get(studentid=studentid)
+                subjects = student.subjects.all()
+                relationships = []
+                for subject in subjects:
+                    relationships = relationships + [get_object_or_404(Student_Subject_Relation, student=student, subject=subject)]
 
-            args = {'relationships': relationships}
-            return render(request, 'adminapp/grades.html', args)
+                args = {'relationships': relationships}
+                return render(request, self.template_name, args)
 
-def subject_details(request, subjectid=None):
-    login_url = settings.LOGIN_URL.lstrip('/')
-    if not request.user.is_authenticated:
-        return redirect(login_url)
-    else:
-        subject = Subject.objects.get(subjectid=subjectid)
-        relationships = Subject_Teacher_Relation.objects.filter(subject=subject)
-        args = {'subject': subject, 'relationships': relationships}
-        return render(request, 'adminapp/subject_details.html', args)
+class SubjectDetail(TemplateView):
+    template_name = 'adminapp/subject_details.html'
+    def get(self, request, subjectid):
+        login_url = settings.LOGIN_URL.lstrip('/')
+        if not request.user.is_authenticated:
+            return redirect(login_url)
+        else:
+            subject = Subject.objects.get(subjectid=subjectid)
+            relationships = Subject_Teacher_Relation.objects.filter(subject=subject)
+            args = {'subject': subject, 'relationships': relationships}
+            return render(request, self.template_name, args)
 
-def teacher_profile(request, teacherid=None):
-    login_url = settings.LOGIN_URL.lstrip('/')
-    if not request.user.is_authenticated:
-        return redirect(login_url)
-    else:
-        teacher = Teacher.objects.get(teacherid=teacherid)
-        args = {'teacher': teacher}
-        return render(request, 'adminapp/teacher_profile.html', args)
+class TeacherProfile(TemplateView):
+    template_name = 'adminapp/teacher_profile.html'
+    def get(self, request, teacherid):
+        login_url = settings.LOGIN_URL.lstrip('/')
+        if not request.user.is_authenticated:
+            return redirect(login_url)
+        else:
+            teacher = Teacher.objects.get(teacherid=teacherid)
+            args = {'teacher': teacher}
+            return render(request, self.template_name, args)
 
-def staffs(request):
-    teachers = Teacher.objects.all().order_by('first_name')
-    args = {'teachers': teachers}
-    return render(request, 'adminapp/staffs.html', args)
+class Staff(TemplateView):
+    template_name = 'adminapp/staffs.html'
+    def get(self, request):
+        teachers = Teacher.objects.all().order_by('first_name')
+        args = {'teachers': teachers}
+        return render(request, self.template_name, args)
 
-def notifications(request, level=None):
-    login_url = settings.LOGIN_URL.lstrip('/')
-    if not request.user.is_authenticated:
-        return redirect(login_url)
-    notifications = Notification.objects.all().filter(level=level).order_by('-pub_date')
-    args = {'notifications': notifications}
-    return render(request, 'adminapp/notifications.html', args)
-def notification_details(request, pk=None):
-    login_url = settings.LOGIN_URL.lstrip('/')
-    if not request.user.is_authenticated:
-        return redirect(login_url)
-    else:
-        notification = Notification.objects.get(id=pk)
-        args = {'notification': notification}
-        return render(request, 'adminapp/notification_details.html', args)
-def all_notifications(request):
-    login_url = settings.LOGIN_URL.lstrip('/')
-    if not request.user.is_authenticated:
-        return redirect(login_url)
-    notifications = Notification.objects.all().order_by('-pub_date', 'level')
-    args = {'notifications': notifications}
-    return render(request, 'adminapp/all_notifications.html', args)
+class Notice(TemplateView):
+    template_name = 'adminapp/notifications.html'
+    def get(self, request, level):
+        login_url = settings.LOGIN_URL.lstrip('/')
+        if not request.user.is_authenticated:
+            return redirect(login_url)
+        notifications = Notification.objects.all().filter(level=level).order_by('-pub_date')
+        args = {'notifications': notifications}
+        return render(request, self.template_name, args)
+        
+class AllNotifications(TemplateView):
+    template_name = 'adminapp/all_notifications.html'
+    def get(self, request):
+        login_url = settings.LOGIN_URL.lstrip('/')
+        if not request.user.is_authenticated:
+            return redirect(login_url)
+        notifications = Notification.objects.all().order_by('-pub_date', 'level')
+        args = {'notifications': notifications}
+        return render(request, self.template_name, args)
 
 class NotificationDetails(TemplateView):
     template_name = 'adminapp/notification_details.html'
@@ -103,10 +105,6 @@ class NotificationDetails(TemplateView):
             form = HomeForm()
             notification = Notification.objects.get(id=pk)
             posts = Post.objects.filter(notification=notification).all().order_by('-created')
-            # users = User.objects.exclude(id=request.user.id)
-            # friend = Friend.objects.get(current_user=request.user)
-            # friends = friend.users.all()
-
             args = {'form': form, 'posts': posts, 'notification': notification}
             return render(request, self.template_name, args)
 
