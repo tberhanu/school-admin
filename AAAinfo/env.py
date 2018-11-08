@@ -1,5 +1,8 @@
 
-
+0. To check our env var value:
+    --> tess$ echo $env_var
+    For example, --> tess$ echo $DJANGO_SETTINGS_MODULE will tell us where
+    Django is looking for our  SETTINGS file
 1. PERMANENTLY: Setting Environmental Variable PERMANENTLY
     --> tess$ cd    #to stay on our HOME DIRECTORY
     --> tess$ touch .bash_profile #just updating the last access time for that files

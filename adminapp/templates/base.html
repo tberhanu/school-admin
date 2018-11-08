@@ -1,142 +1,97 @@
 {% load static %}
-
+<link rel="stylesheet" href="{% static 'adminapp/style.css' %}" type="text/css">
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" dir="ltr">
   <head>
-
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
     {% block title %}
-    <title>Base</title>
+      <title></title>
     {% endblock %}
-    <link rel="stylesheet" href="{% static 'adminapp/style.css' %}" type="text/text/css">
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
 
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/grayscale.min.css' %}" rel="stylesheet">
-
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="{% static 'adminapp/style.css' %}" type="text/css"> -->
   </head>
+  <body>
 
-  <body id="page-top">
+    <div class="container">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        {% if user.is_authenticated %}
-        <a class="navbar-brand js-scroll-trigger" href="/notifications/{{ user.student.level }}/"><h4>Notices</h4></a>
-
-          <a class="navbar-brand js-scroll-trigger" href="/grades/{{ user.student.studentid }}/"><h4>Grades</h4></a>
-        {% endif %}
-
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="http://localhost:8000/admin/login/?next=/admin/"><h4>Admin</h4></a>
-            </li>
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
             {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="{% url 'logout' %}"><h4>Sign Out</h4></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="{% url 'password_reset' %}"><h4>Reset Password</h4></a>
-              </li>
-              {% else %}
-              <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="{% url 'login' %}"><h4>Sign In</h4></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="{% url 'users:signup' %}"><h4>Sign Up</h4></a>
-              </li>
+              <a class="navbar-brand" href="/notifications/{{ user.student.level }}/">Notices</a>
             {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- ####################################################################### -->
-
-    <!-- ####################################################################### -->
-
-
-{% block content %}
-
-
-{% endblock %}
-
-    <!-- Contact Section -->
-    <section class="contact-section bg-black">
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <div class="card-body text-center">
-                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                <h4 class="text-uppercase m-0">Address</h4>
-                <hr class="my-4">
-                <div class="small text-black-50">Kezira Kebele, Dire Dawa City, Ethiopia</div>
-              </div>
-            </div>
           </div>
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <div class="card-body text-center">
-                <i class="fas fa-envelope text-primary mb-2"></i>
-                <h4 class="text-uppercase m-0">Email</h4>
-                <hr class="my-4">
-                <div class="small text-black-50">
-                  <a href="#">rogerbrosolasco@bgs.edu</a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              {% if user.is_authenticated %}
+                <li class="active"><a href="/grades/{{ user.student.studentid }}/">Grades</a></li>
+              {% endif %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/admin/login/?next=/admin/">Admin</a></li>
 
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card py-4 h-100">
-              <div class="card-body text-center">
-                <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                <h4 class="text-uppercase m-0">Phone</h4>
-                <hr class="my-4">
-                <div class="small text-black-50">+251 (912) 902-8832</div>
-              </div>
-            </div>
-          </div>
-        </div>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
 
-        <div class="social d-flex justify-content-center">
-          <a href="#" class="mx-2">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#" class="mx-2">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" class="mx-2">
-            <i class="fab fa-github"></i>
-          </a>
-        </div>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              {% if not user.is_authenticated %}
+                <li><a href="{% url 'login' %}">Sign in</a></li>
+              {% endif %}
+              {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Sign out</a></li>
+              {% endif %}
+              {% if not user.is_authenticated %}
+                <li><a href="{% url 'users:signup' %}">Sign up</a></li>
+              {% endif %}
+              {% if user.is_authenticated %}
+                <li><a href="{% url 'password_reset' %}">Reset Password</a></li>
+              {% endif %}
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
 
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Bisrate Gabriel School</h1>
+        <h2 class="text-white mb-4">Quality Schooling since 1970.</h2>
+
+        <p>A school with maximum reputation with its graduates spread all over the world as a VIP.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="/staffs/" role="button">BGS Staff Members &raquo;</a>
+        </p>
       </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-black small text-center text-white-50">
-      <div class="container">
-        Copyright &copy; BGS 2018
-      </div>
-    </footer>
+      {% block content %}
+      {% endblock %}
 
 
+    </div> <!-- /container -->
 
+
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   </body>
+</html>
 
 </html>
