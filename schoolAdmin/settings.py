@@ -27,7 +27,8 @@ SECRET_KEY = SECRET_KEY
 DEBUG = False
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver'] # new
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver'] # new
+ALLOWED_HOSTS = [*]
 
 # SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__)) # very new
 
