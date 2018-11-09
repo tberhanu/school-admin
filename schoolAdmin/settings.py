@@ -9,21 +9,24 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-# import django_heroku
+import django_heroku # new added for heroku deployment
 
 import os
+from .secured_info import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage' # new added for heroku
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY'] # new
+# SECRET_KEY = os.environ['SECRET_KEY'] # new
+SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver'] # new
@@ -95,7 +98,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'schoolAdmin',
         'USER': 'postgres',
-        'PASSWORD': os.environ['PASSWORD'],
+        # 'PASSWORD': os.environ['PASSWORD'],
+        'PASSWORD': PASSWORD,
         'HOST': '127.0.0.1',
         'PORT': '5433',
     }
@@ -167,7 +171,6 @@ LOGIN_EXEMPT_URLS = (
     r'^users/reset-password/complete/$',
 )
 
-from .secured_info import *
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -177,4 +180,4 @@ EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 
 
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals()) # new added for heroku deployment
