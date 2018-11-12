@@ -19,8 +19,11 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 # from .views import ArticleDetailView
+from django.conf.urls import url
 
+from django.contrib.auth.views import password_reset_confirm
 urlpatterns = [
+    # url(r'^reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm, {'template_name': 'registration/reset_password_confirm.html'}, name='password_reset_confirm'),
 
     path('all-notifications/', views.AllNotifications.as_view(), name="all_notifications"),
     path('notification-details/<int:pk>/', views.NotificationDetails.as_view(), name="notification_details"),
@@ -31,8 +34,12 @@ urlpatterns = [
     path('', views.Home.as_view(), name='home'),
     path('send/', views.sending, name="send"),
     path('admin/', admin.site.urls, name="admin"),
+    # path('users/', include('users.urls')),
     path('users/', include('users.urls')),
+
     path('users/', include('django.contrib.auth.urls')),
+
+    path('registration/log_out', views.logout), # very new
 
     path('grades/<int:studentid>/', views.Grade.as_view(), name="grades"),
     path('accounts/', include('allauth.urls')),
