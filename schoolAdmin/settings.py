@@ -29,8 +29,8 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver'] # new
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver'] # new
 
 # SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__)) # very new
 
@@ -38,7 +38,6 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver'] # new
 # Application definition
 
 INSTALLED_APPS = [
-    # 'accounts.apps.AccountsConfig', # new
     'adminapp', # new
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,12 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig', # new
+    'django.contrib.sites', # important when users sign in
 
-    'django.contrib.sites', # new
-    'allauth', # new
-    'allauth.account', # new
-    'allauth.socialaccount', # new
-    'allauth.socialaccount.providers.github', # new
+#     'allauth', # new
+#     'allauth.account', # new
+#     'allauth.socialaccount', # new
+#     'allauth.socialaccount.providers.github', # new
 ]
 
 
@@ -145,8 +144,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/' # new
 MEDIA_ROOT = os.path.join(BASE_DIR, 'schoolAdmin/media') #new
-LOGIN_REDIRECT_URL = '/' # new
-LOGOUT_REDIRECT_URL = '/' # new
+LOGIN_REDIRECT_URL = '/login_message/' # new
+LOGOUT_REDIRECT_URL = '/logout_message/' # new
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
@@ -174,6 +173,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST = 'smtp-mail.outlook.com'
+
 EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_PORT = 587
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD

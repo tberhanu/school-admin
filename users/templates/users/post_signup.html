@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Registration</title>
+{% endblock %}
+
+{% block content %}
+  <h1> Wel come to BGS</h1>
+  {% if signedup %}
+    <p>You signed up successfully.Please <a href="{% url 'login' %}">Sign In</a> here.</p>
+  {% endif %}
+{% endblock %}

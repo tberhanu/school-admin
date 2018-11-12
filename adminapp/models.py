@@ -60,7 +60,8 @@ class Teacher(models.Model):
 
 class Student(models.Model):
     studentid = models.BigIntegerField(primary_key = True)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) # new
+    """the ffling line is important to link the 'signed_in_user' with the 'Student'."""
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30, blank=True)
     email = models.EmailField(max_length=254, blank=True, null=True)

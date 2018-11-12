@@ -13,8 +13,10 @@ from adminapp.forms import HomeForm
 from django.views.generic.detail import DetailView
 # def password_reset_confirm(request):
 #     return render(request, 'registration/password_reset_confirm.html')
-def logout(request):
-    return render(request, 'registration/log_out.html')
+def logout_message(request):
+    return render(request, 'users/post_logout.html')
+def login_message(request):
+    return render(request, 'users/post_login.html')
 def sending(request):
     # email = EmailMessage('title', 'body', to=['tberhanu@berkeley.edu'])
     # email.send()

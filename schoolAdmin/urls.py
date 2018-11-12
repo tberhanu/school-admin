@@ -22,8 +22,13 @@ from django.conf.urls.static import static
 from django.conf.urls import url
 
 from django.contrib.auth.views import password_reset_confirm
+# app_name = 'adminapp'
 urlpatterns = [
     # url(r'^reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm, {'template_name': 'registration/reset_password_confirm.html'}, name='password_reset_confirm'),
+    path('logout_message/', views.logout_message),
+    path('login_message/', views.login_message),
+    path('users/', include('users.urls')), # we customize this for 'sign up' purpose
+    path('users/', include('django.contrib.auth.urls')),
 
     path('all-notifications/', views.AllNotifications.as_view(), name="all_notifications"),
     path('notification-details/<int:pk>/', views.NotificationDetails.as_view(), name="notification_details"),
@@ -34,16 +39,11 @@ urlpatterns = [
     path('', views.Home.as_view(), name='home'),
     path('send/', views.sending, name="send"),
     path('admin/', admin.site.urls, name="admin"),
-    # path('users/', include('users.urls')),
-    path('users/', include('users.urls')),
 
-    path('users/', include('django.contrib.auth.urls')),
 
-    path('registration/log_out', views.logout), # very new
+
 
     path('grades/<int:studentid>/', views.Grade.as_view(), name="grades"),
-    path('accounts/', include('allauth.urls')),
-    # path('gitlog/', views.Homes.as_view(), name='homes'), # this couldn't work
     path('subject-details/<int:subjectid>/', views.SubjectDetails.as_view(), name="subject-details"),
     path('teacher-profile/<int:teacherid>/', views.TeacherProfile.as_view(), name="teacher_profile"),
 
