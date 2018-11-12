@@ -1,7 +1,6 @@
 from django import forms
 from adminapp.models import Post
 
-
 class HomeForm(forms.ModelForm):
     post = forms.CharField(widget=forms.TextInput(
         attrs={
@@ -13,3 +12,4 @@ class HomeForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('post',)
+###################################

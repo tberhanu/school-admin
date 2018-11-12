@@ -11,7 +11,10 @@ from django.core.mail import send_mail
 from adminapp.forms import HomeForm
 
 from django.views.generic.detail import DetailView
-
+# def password_reset_confirm(request):
+#     return render(request, 'registration/password_reset_confirm.html')
+def logout(request):
+    return render(request, 'registration/log_out.html')
 def sending(request):
     # email = EmailMessage('title', 'body', to=['tberhanu@berkeley.edu'])
     # email.send()
@@ -20,8 +23,9 @@ def sending(request):
     'Subject here',
     'Here is the message.',
     'tesfahunt@gmail.com',
-    ['tesfahunt@bisrategabriel.com', 'tberhanu@berkeley.edu', 'tessberhanu@gmail.com', 'tesfahunt@gmail.com'],
+    ['tessberhanu@gmail.com', 'tesfahunt@gmail.com', 'tesfahunt@bisrategabriel.com'],
     fail_silently=False,)
+
     return render(request, 'adminapp/send.html')
 
 

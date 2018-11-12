@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 from .secured_info import *
+import django
+
+# from django.contrib.sites.models import Site
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,8 +29,8 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver'] # new
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver'] # new
 
 # SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__)) # very new
 
@@ -35,7 +38,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts.apps.AccountsConfig', # new
+    # 'accounts.apps.AccountsConfig', # new
     'adminapp', # new
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,9 +53,8 @@ INSTALLED_APPS = [
     'allauth.account', # new
     'allauth.socialaccount', # new
     'allauth.socialaccount.providers.github', # new
-
-
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -168,10 +170,18 @@ LOGIN_EXEMPT_URLS = (
     r'^users/reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
     r'^users/reset-password/complete/$',
 )
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_PORT = 587
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+DEFAULT_FROM_EMAIL = 'tesfahunt@gmail.com'
+
+
+# site = Site.get_current_site()
+# site.domain = 'www.bisrategabriel.com'
+# site.site_name = 'bgs'
+# site_name = 'bgs'
+# domain = 'www.bisrategabriel.com'

@@ -1,0 +1,28 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password reset on example.com
+From: tesfahunt@gmail.com
+To: tesfahunt@gmail.com
+Date: Sun, 11 Nov 2018 22:06:12 -0000
+Message-ID: <154197397219.56310.1141106703728217579@Tesss-MacBook-Pro.local>
+
+
+
+You're receiving this email because you requested a password reset
+ for your user account at example.com.
+ 
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1/users/reset/Mg/517-3eb68cd8c7dc393b4085/
+
+Your username, in case you've forgotten: tesfahunt
+
+Thanks for using our site!
+
+The example.com team
+
+
+
+-------------------------------------------------------------------------------
