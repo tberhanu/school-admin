@@ -1,3 +1,3 @@
 # school-admin
-username: tesfahunt
-password: tested@2014
+username: t--t
+password: t*****%***4
